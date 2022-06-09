@@ -15,6 +15,7 @@ class Company extends Model
      * @var string
      */
     protected $table = 'company';
+    protected $fillable = ['name', 'parent_company_name','parent_company_id'];
 
     public function stations()
     {
