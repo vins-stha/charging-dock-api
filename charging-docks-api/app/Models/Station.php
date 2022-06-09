@@ -15,8 +15,9 @@ class Station extends Model
      * @var string
      */
     protected $table = 'Station';
+    protected $fillable=['name','address','latitude','longitude','parent_company_name', 'company_id'];
 
     public function company(){
-        return $this->belongsTo('\Models\Company', 'company_id', 'id');
+        return $this->belongsTo(Company::class, 'company_id', 'id');
     }
 }
