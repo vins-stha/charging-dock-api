@@ -40,7 +40,7 @@ class StationController extends Controller
 
         $parent_company_name = $request->get('parent_company_name');
         if ($parent_company_name === null) {
-            return response()->json(["data" => "Parent company required!"], 500);
+            return response()->json(["data" => "Parent company required!"], 400);
         }
 
         if ($parent_company_name !== null) {
@@ -58,7 +58,7 @@ class StationController extends Controller
             $station->save();
 
         } catch (Exception $exception) {
-            return response()->json($exception, 500);
+            return response()->json($exception, 400);
         }
         return response()->json($station, 201);
 
@@ -75,7 +75,7 @@ class StationController extends Controller
             }
 
         } catch (Exception $exception) {
-            return response()->json($exception, 500);
+            return response()->json($exception, 400);
         }
 
         return response()->json($station, 200);
@@ -119,11 +119,11 @@ class StationController extends Controller
                 $station->save();
 
             } catch (Exception $exception) {
-                return response()->json($exception, 500);
+                return response()->json($exception, 400);
             }
 
         } catch (Exception $exception) {
-            return response()->json($exception, 500);
+            return response()->json($exception, 400);
         }
         return response()->json($station, 200);
     }
@@ -140,10 +140,10 @@ class StationController extends Controller
             $station->delete();
 
         } catch (Exception $exception) {
-            return response()->json($exception, 500);
+            return response()->json($exception, 400);
         }
 
-        return response()->json(["data" => "Deleted successfully."], 200);
+        return response()->json(["data" => "Deleted successfully."], 204);
     }
 
     public function isNearToThePoint($radius, $startLat, $startLong, $stationLat, $stationong)
