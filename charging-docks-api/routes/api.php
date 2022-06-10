@@ -30,6 +30,8 @@ Route::prefix('/v1/company')->group(function(){
 
 Route::prefix('/v1/station')->group(function(){
     Route::get('/', [\App\Http\Controllers\StationController::class,'index']);
+    Route::get('/company/{id}', [\App\Http\Controllers\StationController::class,'allStationsByParentCompanyId']);
+
     Route::get('/{id}', [\App\Http\Controllers\StationController::class,'findById']);
 
     Route::post('/', [\App\Http\Controllers\StationController::class,'create']);

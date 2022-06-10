@@ -7,14 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\Company;
 use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
-use phpDocumentor\Reflection\Types\Integer;
-use function PHPUnit\Framework\isEmpty;
 
 class CompanyController extends Controller
 {
     public function index(Request $request)
     {
-        $companies = Company::all();//ompany::with('station')->get()->all();
+        $companies = Company::with('stations')->get();
 
         return response()->json($companies, 200);
 
@@ -48,10 +46,10 @@ class CompanyController extends Controller
     {
         $id = intval($id);
         try {
-            $company = Company::find($id);
+            $company = Company::with('stations')->find($id);
 
             if (!$company) {
-                return response()->json(["data"=>"Not found"], 404);
+                return response()->json(["data" => "Not found"], 404);
             }
 
         } catch (Exception $exception) {
@@ -67,14 +65,14 @@ class CompanyController extends Controller
         try {
             $company = Company::find($id);
             if (!$company) {
-                return response()->json(["data"=>"Not found"], 404);
+                return response()->json(["data" => "Not found"], 404);
             }
 
             $company->name = $request->get('name');
             $parent_company_name = $request->get('parent_company_name');
 
             if ($parent_company_name !== null) {
-                $company->parent_company_id = Company::where('name', $parent_company_name)//DB::table('company')
+                $company->parent_company_id = Company::where('name', $parent_company_name)
                     ->value('id');
             }
             try {
@@ -98,7 +96,7 @@ class CompanyController extends Controller
             $company = Company::find($id);
 
             if (!$company) {
-                return response()->json(["data"=>"Not found"], 404);
+                return response()->json(["data" => "Not found"], 404);
             }
             $company->delete();
 
@@ -106,7 +104,7 @@ class CompanyController extends Controller
             return response()->json($exception, 500);
         }
 
-        return response()->json(["data"=>"Deleted successfully."], 200);
+        return response()->json(["data" => "Deleted successfully."], 200);
     }
 
 }
