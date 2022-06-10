@@ -19,6 +19,6 @@ class Company extends Model
 
     public function stations()
     {
-        return $this->hasMany('\Models\Station', 'company_id', 'id');
+        return $this->hasMany(Station::class);
     }
 }
