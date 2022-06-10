@@ -23,6 +23,7 @@ Route::prefix('/v1/company')->group(function(){
     Route::get('/{id}', [\App\Http\Controllers\CompanyController::class,'findById']);
 
     Route::post('/', [\App\Http\Controllers\CompanyController::class,'create']);
+    Route::put('/update/{id}', [\App\Http\Controllers\CompanyController::class,'updateById']);
     Route::put('/{id}', [\App\Http\Controllers\CompanyController::class,'updateById']);
     Route::delete('/{id}', [\App\Http\Controllers\CompanyController::class,'destroy']);
 

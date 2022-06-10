@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use Mockery\Exception;
 
 class CompanyController extends Controller
