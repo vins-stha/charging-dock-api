@@ -36,7 +36,7 @@ class CompanyController extends Controller
                 $company->save();
             }
         } catch (Exception $exception) {
-            return response()->json($exception, 500);
+            return response()->json($exception, 400);
         }
         return response()->json($company, 201);
 
@@ -53,7 +53,7 @@ class CompanyController extends Controller
             }
 
         } catch (Exception $exception) {
-            return response()->json($exception, 500);
+            return response()->json($exception, 400);
         }
 
         return response()->json($company, 200);
@@ -80,11 +80,11 @@ class CompanyController extends Controller
                 $company->save();
 
             } catch (Exception $exception) {
-                return response()->json($exception, 500);
+                return response()->json($exception, 400);
             }
 
         } catch (Exception $exception) {
-            return response()->json($exception, 500);
+            return response()->json($exception, 400);
         }
         return response()->json($company, 200);
     }
@@ -101,10 +101,10 @@ class CompanyController extends Controller
             $company->delete();
 
         } catch (Exception $exception) {
-            return response()->json($exception, 500);
+            return response()->json($exception, 400);
         }
 
-        return response()->json(["data" => "Deleted successfully."], 200);
+        return response()->json(["data" => "Deleted successfully."], 204);
     }
 
 }
