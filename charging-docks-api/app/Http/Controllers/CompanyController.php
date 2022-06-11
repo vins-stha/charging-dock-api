@@ -11,23 +11,22 @@ use Mockery\Exception;
 
 class CompanyController extends Controller
 {
-/**
-* @OA\Get(
-* path="/company",
-* summary="Retrieve all companies",
-* description="Get list of companies",
-* operationId="listCompany",
-* tags={"list"},
-
- * @OA\Response(
- *    response=200,
- *    description="Success",
- *    @OA\JsonContent(
- *       @OA\Property(type="object")
-*        )
- *     ),
- * )
- */
+    /**
+     * @OA\Get(
+     * path="/company",
+     * summary="Retrieve all companies",
+     * description="Get list of companies",
+     * operationId="listCompany",
+     * tags={"list"},
+     * @OA\Response(
+     *    response=200,
+     *    description="Success",
+     *    @OA\JsonContent(
+     *       @OA\Property(type="object")
+     *        )
+     *     ),
+     * )
+     */
     public function index(Request $request)
     {
         $companies = Company::with('stations')->get();
@@ -38,16 +37,17 @@ class CompanyController extends Controller
 
     /**
      * @OA\Post(
-     * path="/",
+     * path="/company",
      * summary="Add new company",
      * description="Add new company",
-     * tags={"newcompany"},
+     * tags={"create"},
      * @OA\RequestBody(
      *    required=true,
      *    description="Pass company details",
      *    @OA\JsonContent(
      *       required={"name"},
      *       @OA\Property(property="name", type="string"),
+     *     @OA\Property(property="parent company name", type="string"),
      *    ),
      * ),
      * @OA\Response(
@@ -83,6 +83,33 @@ class CompanyController extends Controller
 
     }
 
+    /**
+     * @OA\Get(
+     *      path="/company/{id}",
+     *      operationId="getCompanyById",
+     *      tags={"find by id"},
+     *      summary="Get company information",
+     *      description="Returns company data",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="company id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\Property(property="message", type="object")
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *      ),
+     * )
+     */
     public function findById(Request $request, $id)
     {
         $id = intval($id);
@@ -100,6 +127,40 @@ class CompanyController extends Controller
         return response()->json($company, 200);
     }
 
+    /**
+     * @OA\Put(
+     * path="/company/{id}",
+     * operationId="UpdateById",
+     * summary="Edit company",
+     * description="Update company",
+     * tags={"update by id"},
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="company id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="Update company details",
+     *    @OA\JsonContent(
+     *       required={"name", "parent_company_name"},
+     *       @OA\Property(property="name", type="string"),
+     *     @OA\Property(property="parent company name", type="string"),
+     *    ),
+     * ),
+     * @OA\Response(
+     *    response=200,
+     *    description="Updated",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="object")
+     *        )
+     *     )
+     * )
+     */
     public function updateById(Request $request, $id)
     {
         $id = intval($id);
@@ -130,6 +191,35 @@ class CompanyController extends Controller
         return response()->json($company, 200);
     }
 
+    /**
+     * @OA\Delete(
+     * path="/company/{id}",
+     * operationId="DeleteById",
+     * summary="Delete company",
+     * description="Delete company",
+     * tags={"Delete by id"},
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="company id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * @OA\Response(
+     *    response=204,
+     *    description="Deleted successfully",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="object")
+     *        )
+     *     ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *      ),
+     * )
+     */
     public function destroy(Request $request, $id)
     {
         $id = intval($id);

@@ -43,16 +43,14 @@
                         }
                     }
                 }
-            }
-        },
-        "/": {
+            },
             "post": {
                 "tags": [
-                    "newcompany"
+                    "create"
                 ],
                 "summary": "Add new company",
                 "description": "Add new company",
-                "operationId": "ab1f36ab0feec188f322688d4407fa38",
+                "operationId": "d7bd964d23e0ec8f55cf3b4e73948627",
                 "requestBody": {
                     "description": "Pass company details",
                     "required": true,
@@ -64,6 +62,9 @@
                                 ],
                                 "properties": {
                                     "name": {
+                                        "type": "string"
+                                    },
+                                    "parent company name": {
                                         "type": "string"
                                     }
                                 },
@@ -87,6 +88,133 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/company/{id}": {
+            "get": {
+                "tags": [
+                    "find by id"
+                ],
+                "summary": "Get company information",
+                "description": "Returns company data",
+                "operationId": "getCompanyById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "company id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "update by id"
+                ],
+                "summary": "Edit company",
+                "description": "Update company",
+                "operationId": "UpdateById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "company id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update company details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "parent_company_name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "parent company name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Delete by id"
+                ],
+                "summary": "Delete company",
+                "description": "Delete company",
+                "operationId": "DeleteById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "company id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
                     }
                 }
             }
