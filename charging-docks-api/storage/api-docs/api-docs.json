@@ -21,7 +21,7 @@
         "/company": {
             "get": {
                 "tags": [
-                    "list"
+                    "List all companies"
                 ],
                 "summary": "Retrieve all companies",
                 "description": "Get list of companies",
@@ -46,7 +46,7 @@
             },
             "post": {
                 "tags": [
-                    "create"
+                    "Create new company"
                 ],
                 "summary": "Add new company",
                 "description": "Add new company",
@@ -95,7 +95,7 @@
         "/company/{id}": {
             "get": {
                 "tags": [
-                    "find by id"
+                    "Find company by id"
                 ],
                 "summary": "Get company information",
                 "description": "Returns company data",
@@ -122,7 +122,7 @@
             },
             "put": {
                 "tags": [
-                    "update by id"
+                    "Update company by id"
                 ],
                 "summary": "Edit company",
                 "description": "Update company",
@@ -181,7 +181,7 @@
             },
             "delete": {
                 "tags": [
-                    "Delete by id"
+                    "Delete company by id"
                 ],
                 "summary": "Delete company",
                 "description": "Delete company",
@@ -212,6 +212,276 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/station": {
+            "get": {
+                "tags": [
+                    "List all stations"
+                ],
+                "summary": "List all stations",
+                "description": "Get list of stations",
+                "operationId": "listStation",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Add new station"
+                ],
+                "summary": "Add new station",
+                "description": "Add new station",
+                "operationId": "077d5beed0dfc33cf444d097f374b9eb",
+                "requestBody": {
+                    "description": "Pass station details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "parent_company_name",
+                                    "address"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "parent_company_name": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "latitude": {
+                                        "type": "number",
+                                        "format": "double"
+                                    },
+                                    "longitude": {
+                                        "type": "number",
+                                        "format": "double"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/station/{id}": {
+            "get": {
+                "tags": [
+                    "Find Station by id"
+                ],
+                "summary": "Get station information",
+                "description": "Returns station data",
+                "operationId": "getStationById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "station id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Update station by id"
+                ],
+                "summary": "Edit station information ",
+                "description": "Update station",
+                "operationId": "UpdateStationById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "station id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass station details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "parent_company_name",
+                                    "address"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "parent_company_name": {
+                                        "type": "string"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "latitude": {
+                                        "type": "number",
+                                        "format": "double"
+                                    },
+                                    "longitude": {
+                                        "type": "number",
+                                        "format": "double"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Updated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Delete station by id"
+                ],
+                "summary": "Delete station",
+                "description": "Delete station",
+                "operationId": "DeleteStationById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "station id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        },
+        "/station/company/{id}": {
+            "get": {
+                "tags": [
+                    "Find Stations by company id"
+                ],
+                "summary": "List all stations information by company",
+                "description": "Returns station list for given company",
+                "operationId": "getAllStationsByCompanyId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "company id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
                     },
                     "404": {
                         "description": "Not found"
