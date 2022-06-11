@@ -17,7 +17,7 @@ class CompanyController extends Controller
      * summary="Retrieve all companies",
      * description="Get list of companies",
      * operationId="listCompany",
-     * tags={"list"},
+     * tags={"List all companies"},
      * @OA\Response(
      *    response=200,
      *    description="Success",
@@ -40,7 +40,7 @@ class CompanyController extends Controller
      * path="/company",
      * summary="Add new company",
      * description="Add new company",
-     * tags={"create"},
+     * tags={"Create new company"},
      * @OA\RequestBody(
      *    required=true,
      *    description="Pass company details",
@@ -87,7 +87,7 @@ class CompanyController extends Controller
      * @OA\Get(
      *      path="/company/{id}",
      *      operationId="getCompanyById",
-     *      tags={"find by id"},
+     *      tags={"Find company by id"},
      *      summary="Get company information",
      *      description="Returns company data",
      *      @OA\Parameter(
@@ -133,7 +133,7 @@ class CompanyController extends Controller
      * operationId="UpdateById",
      * summary="Edit company",
      * description="Update company",
-     * tags={"update by id"},
+     * tags={"Update company by id"},
      *      @OA\Parameter(
      *          name="id",
      *          description="company id",
@@ -197,7 +197,7 @@ class CompanyController extends Controller
      * operationId="DeleteById",
      * summary="Delete company",
      * description="Delete company",
-     * tags={"Delete by id"},
+     * tags={"Delete company by id"},
      *      @OA\Parameter(
      *          name="id",
      *          description="company id",

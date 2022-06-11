@@ -14,6 +14,22 @@ use function PHPUnit\Framework\isNull;
 
 class StationController extends Controller
 {
+    /**
+     * @OA\Get(
+     * path="/station",
+     * summary="List all stations",
+     * description="Get list of stations",
+     * operationId="listStation",
+     * tags={"List all stations"},
+     * @OA\Response(
+     *    response=200,
+     *    description="Success",
+     *    @OA\JsonContent(
+     *       @OA\Property(type="object")
+     *        )
+     *     ),
+     * )
+     */
     public function index(Request $request)
     {
         $lat=13.20;
@@ -31,6 +47,40 @@ class StationController extends Controller
         return response()->json($stationInRadius, 200);
     }
 
+    /**
+     * @OA\Post(
+     * path="/station",
+     * summary="Add new station",
+     * description="Add new station",
+     * tags={"Add new station"},
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="Pass station details",
+     *    @OA\JsonContent(
+     *       required={"name", "parent_company_name", "address"},
+     *       @OA\Property(property="name", type="string"),
+     *     @OA\Property(property="parent_company_name", type="string"),
+     *      @OA\Property(property="address", type="string"),
+     *      @OA\Property(property="latitude", type="double"),
+     *      @OA\Property(property="longitude", type="double"),
+     *    ),
+     * ),
+     * @OA\Response(
+     *    response=201,
+     *    description="Created",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="object")
+     *        )
+     *     ),
+     * @OA\Response(
+     *    response=400,
+     *    description="Bad request",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="object")
+     *        )
+     *     )
+     * )
+     */
     public function create(Request $request)
     {
         $station['name'] = $request->get('name');
@@ -64,6 +114,33 @@ class StationController extends Controller
 
     }
 
+    /**
+     * @OA\Get(
+     *      path="/station/{id}",
+     *      operationId="getStationById",
+     *      tags={"Find Station by id"},
+     *      summary="Get station information",
+     *      description="Returns station data",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="station id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\Property(property="message", type="object")
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *      ),
+     * )
+     */
     public function findById(Request $request, $id)
     {
         $id = intval($id);
@@ -81,6 +158,33 @@ class StationController extends Controller
         return response()->json($station, 200);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/station/company/{id}",
+     *      operationId="getAllStationsByCompanyId",
+     *      tags={"Find Stations by company id"},
+     *      summary="List all stations information by company",
+     *      description="Returns station list for given company",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="company id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\Property(property="message", type="object")
+     *       ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *      ),
+     * )
+     */
     public function allStationsByParentCompanyId(Request $request, $id){
 
         $id = intval($id);
@@ -90,6 +194,43 @@ class StationController extends Controller
         return response()->json($stations, 200);
     }
 
+    /**
+     * @OA\Put(
+     * path="/station/{id}",
+     * operationId="UpdateStationById",
+     * summary="Edit station information ",
+     * description="Update station",
+     * tags={"Update station by id"},
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="station id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="Pass station details",
+     *    @OA\JsonContent(
+     *       required={"name", "parent_company_name", "address"},
+     *       @OA\Property(property="name", type="string"),
+     *     @OA\Property(property="parent_company_name", type="string"),
+     *      @OA\Property(property="address", type="string"),
+     *      @OA\Property(property="latitude", type="double"),
+     *      @OA\Property(property="longitude", type="double"),
+     *    ),
+     * ),
+     * @OA\Response(
+     *    response=200,
+     *    description="Updated",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="object")
+     *        )
+     *     )
+     * )
+     */
     public function updateById(Request $request, $id)
     {
         $id = intval($id);
@@ -128,6 +269,35 @@ class StationController extends Controller
         return response()->json($station, 200);
     }
 
+    /**
+     * @OA\Delete(
+     * path="/station/{id}",
+     * operationId="DeleteStationById",
+     * summary="Delete station",
+     * description="Delete station",
+     * tags={"Delete station by id"},
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="station id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     * @OA\Response(
+     *    response=204,
+     *    description="Deleted successfully",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="object")
+     *        )
+     *     ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Not found"
+     *      ),
+     * )
+     */
     public function destroy(Request $request, $id)
     {
         $id = intval($id);
