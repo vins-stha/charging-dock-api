@@ -11,6 +11,23 @@ use Mockery\Exception;
 
 class CompanyController extends Controller
 {
+/**
+* @OA\Get(
+* path="/company",
+* summary="Retrieve all companies",
+* description="Get list of companies",
+* operationId="listCompany",
+* tags={"list"},
+
+ * @OA\Response(
+ *    response=200,
+ *    description="Success",
+ *    @OA\JsonContent(
+ *       @OA\Property(type="object")
+*        )
+ *     ),
+ * )
+ */
     public function index(Request $request)
     {
         $companies = Company::with('stations')->get();
@@ -19,6 +36,29 @@ class CompanyController extends Controller
 
     }
 
+    /**
+     * @OA\Post(
+     * path="/",
+     * summary="Add new company",
+     * description="Add new company",
+     * tags={"newcompany"},
+     * @OA\RequestBody(
+     *    required=true,
+     *    description="Pass company details",
+     *    @OA\JsonContent(
+     *       required={"name"},
+     *       @OA\Property(property="name", type="string"),
+     *    ),
+     * ),
+     * @OA\Response(
+     *    response=201,
+     *    description="Created",
+     *    @OA\JsonContent(
+     *       @OA\Property(property="message", type="object")
+     *        )
+     *     )
+     * )
+     */
     public function create(Request $request)
     {
         $company['name'] = $request->get('name');
@@ -109,3 +149,6 @@ class CompanyController extends Controller
     }
 
 }
+
+
+
