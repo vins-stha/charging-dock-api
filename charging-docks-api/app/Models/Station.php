@@ -18,6 +18,6 @@ class Station extends Model
     protected $fillable=['name','address','latitude','longitude','parent_company_name', 'company_id'];
 
     public function company(){
-        return $this->belongsTo(Company::class, 'company_id', 'id');
+        return $this->belongsTo(Company::class);
     }
 }
