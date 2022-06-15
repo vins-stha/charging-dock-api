@@ -22,20 +22,22 @@ class CompanyTest extends TestCase
 
     public function testAddNewCompany()
     {
-        $payload= [
+        $payload = [
             'name' => 'ParentCompany1'
         ];
 
-        $this->json('post','/api/v1/company',$payload)
-        ->assertStatus(201)
-        ->assertJsonStructure([
-            'data' => 
-               [ 'id',
-                'name',
-                'parent_company_id',
-                'created_at',
-                'updated_at']
-            
-        ]);
+        $response = $this->json('post', '/api/v1/company', $payload);
+
+        $response->assertStatus(201)
+            ->assertJsonStructure(
+                [
+                    'name',
+                    'updated_at',
+                    'created_at',
+                    'id',
+                    'parent_company_id'
+                ]
+            );
+
     }
 }
