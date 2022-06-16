@@ -23,3 +23,7 @@ Deployable in both local environment as well as via docker-environment
 - make migrations via php `artisan migrate:fresh`
 - deploy with `php artisan serve`
 
+####  Frontend
+ consumes the api and allows user to implement simple crud actions
+- deploy frontend app inside a web server
+
