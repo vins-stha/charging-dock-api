@@ -20,7 +20,7 @@ class CreateStationTable extends Migration
             $table->string('address');
             $table->double('latitude');
             $table->double('longitude');
-            $table->unsignedBigInteger('company_id')->unique();
+            $table->unsignedBigInteger('company_id');
 
             $table->foreign('company_id')
                 ->references('id')
