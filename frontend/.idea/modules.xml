@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$USER_HOME$/Desktop/Integrify/charging-docks-api/.idea/charging-docks-api.iml" filepath="$USER_HOME$/Desktop/Integrify/charging-docks-api/.idea/charging-docks-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../eas/.idea/eas.iml" filepath="$PROJECT_DIR$/../eas/.idea/eas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/frontend.iml" filepath="$PROJECT_DIR$/.idea/frontend.iml" />
+    </modules>
+  </component>
+</project>
