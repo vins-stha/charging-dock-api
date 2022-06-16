@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/charging-docks-api.iml" filepath="$PROJECT_DIR$/.idea/charging-docks-api.iml" />
       <module fileurl="file://C:/wamp64/www/frontend/.idea/frontend.iml" filepath="C:/wamp64/www/frontend/.idea/frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../wunderapi/symfony-rest-api/.idea/symfony-rest-api.iml" filepath="$PROJECT_DIR$/../../wunderapi/symfony-rest-api/.idea/symfony-rest-api.iml" />
     </modules>
   </component>
 </project>
