@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c34a3c5c-3a7b-40c2-81e7-c454b205a785" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/frontend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/frontend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indexx.html" beforeDir="false" />
+    </list>
+    <list id="ac3c9e27-5408-45d4-a2d9-dfba6e461ce4" name="notrequired" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$USER_HOME$/Desktop/Integrify/charging-docks-api" />
+  </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost:8000/api/v1" id="0eb91a38-0144-4e43-8e49-f839934f79b4" name="evapi" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$USER_HOME$/Desktop/Integrify/charging-docks-api/charging-docks-api" remote-root="/" />
+          <mapping local-root="$PROJECT_DIR$/../eas" remote-root="/" />
+        </path_mappings>
+      </server>
+      <server host="localhost" id="d13dd02e-ef2e-430b-9bf5-222ce8008d64" name="localhost" />
+    </servers>
+  </component>
+  <component name="ProjectId" id="2AO2W5GMzEktykBN9q7xHXUkO5U" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Integrify/charging-docks-api" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\eas" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="PHP Web Page.evapi">
+    <configuration name="easoop" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="evapi">
+      <method v="2" />
+    </configuration>
+    <configuration name="evapi" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="evapi" start_url="/company">
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="PHP Web Page.easoop" />
+      <item itemvalue="PHP Web Page.evapi" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c34a3c5c-3a7b-40c2-81e7-c454b205a785" name="Default Changelist" comment="" />
+      <changelist id="ac3c9e27-5408-45d4-a2d9-dfba6e461ce4" name="notrequired" comment="" />
+      <created>1655201896412</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1655201896412</updated>
+      <workItem from="1655201906547" duration="55831000" />
+      <workItem from="1655322176615" duration="25565000" />
+      <workItem from="1655394872197" duration="2280000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/../eas/index.php</url>
+          <line>18</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/../eas/Components/ApiCall.php</url>
+          <line>120</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/../eas/Components/ApiCall.php</url>
+          <line>122</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/../eas/index.php</url>
+          <line>63</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
