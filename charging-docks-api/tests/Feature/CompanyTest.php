@@ -40,8 +40,7 @@ class CompanyTest extends TestCase
             ['name' => $this->faker->name]
         ];
 
-        foreach($payloads as $payload)
-        {
+        foreach ($payloads as $payload) {
             $response[] = json_decode($this->json('post', '/api/v1/company', $payload)->getContent());
 
         }
@@ -52,20 +51,18 @@ class CompanyTest extends TestCase
 
     }
 
-
     public function testGetCompanyById()
     {
 
         $payload = [
             'name' => $this->faker->name,
-
         ];
 
         $post_response = json_decode($this->json('post', '/api/v1/company', $payload)->getContent());
 
         $id = $post_response->id;
 
-        $get_response_json = $this->json('get','/api/v1/company/'.$id);
+        $get_response_json = $this->json('get', '/api/v1/company/' . $id);
         $get_response_json->assertJsonStructure([
             'id',
             'name',
@@ -77,6 +74,64 @@ class CompanyTest extends TestCase
 
         $get_response_obj = json_decode($get_response_json->getContent());
         $this->assertEquals($get_response_obj->name, $payload['name']);
+
+    }
+
+    public function testUpdateCompanyById()
+    {
+        // create
+        $payload = [
+            'name' => $this->faker->name,
+        ];
+
+        $post_response = json_decode($this->json('post', '/api/v1/company', $payload)->getContent());
+
+        $id = $post_response->id;
+
+        $updated_payload = [
+            'name' => "updated_name",
+        ];
+
+        // update
+        $get_response_json = $this->json('put', '/api/v1/company/' . $id, $updated_payload);
+        $get_response_json->assertJsonStructure([
+            'id',
+            'name',
+            'parent_company_id',
+            'created_at',
+            'updated_at',
+        ]);
+
+        $get_response_obj = json_decode($get_response_json->getContent());
+
+        // test
+        $this->assertEquals($get_response_obj->name, $updated_payload['name']);
+
+    }
+
+    public function testDeleteCompanyById()
+    {
+        // create
+        $payload = [
+            'name' => $this->faker->name,
+        ];
+
+        $post_response = json_decode($this->json('post', '/api/v1/company', $payload)->getContent());
+
+        $id = $post_response->id;
+
+        // delete
+        $get_response_json = $this->json('delete', '/api/v1/company/' . $id);
+
+        $get_response_obj = $get_response_json->getData();
+
+        // tests
+        $get_response_json->assertStatus(204);
+        $this->assertEquals($get_response_obj->data, "Deleted successfully.");
+
+        $get_response = $this->json('get', '/api/v1/company' . $id);
+        $get_response->assertStatus(404);
+
 
     }
 }
