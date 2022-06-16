@@ -1,0 +1,54 @@
+version: "3.0"
+services:
+  laravelApp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: app
+    container_name: laravel_app
+    restart: unless-stopped
+    working_dir: /var/www
+    command: 'php artisan serve --host=0.0.0.0'
+    ports:
+      - 8001:8000
+    depends_on:
+      - mysql
+    volumes:
+      - ./:/var/www
+    networks:
+      - app
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: host.docker.internal
+      MYSQL_DATABASE: ev_chargingDocks
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      command: >
+        - " mysql -u root && CREATE DATABASE IF NOT EXISTS ${DB_DATABASE}"
+
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    ports:
+      - 3308:3306
+    networks:
+      - app
+  nginx:
+    image: nginx:latest
+    container_name:  laravel_nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+    networks:
+      - app
+networks:
+  app:
+    driver: bridge

@@ -14,5 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+Route::get('/company/',[\App\Http\Controllers\CompanyController::class,'index']);
+Route::get('/company/list', function () {
+    return view('company.index');
+});
+Route::get('/company/create', function () {
+    return view('company.index');
 });
