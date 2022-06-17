@@ -9,7 +9,7 @@ Deployable in both local environment as well as via docker-environment
     -  `/api/docs    `
 #### How to get this app running
 - clone the app `git clone https://github.com/vins-stha/charging-dock-api.git`
-- pull from `develop` branch 
+- pull from `main` branch 
 - install dependencies with `composer install` from the root directory
 - make migrations via php `artisan migrate:fresh`
 - deploy with` php artisan serve`
