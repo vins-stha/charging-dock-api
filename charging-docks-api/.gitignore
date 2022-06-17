@@ -13,3 +13,9 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+../.idea/
+../.idea/*
+../.idea/charging-docks-api.iml
+../.idea/vcs.xml
+
+.gitignore
