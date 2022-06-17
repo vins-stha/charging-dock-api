@@ -1,5 +1,6 @@
 <?php
 include ('headLayout.php');
+
 ?>
 <div class="container-fluid">
     <div class="card-holder flex">
@@ -17,7 +18,7 @@ include ('headLayout.php');
             <div class="card-body">
                 <h5 class="card-title">Stations</h5>
 
-                <a href="station" class="btn btn-primary">Companies Dashboard</a>
+                <a href="station" class="btn btn-primary">Stations Dashboard</a>
             </div>
         </div>
 

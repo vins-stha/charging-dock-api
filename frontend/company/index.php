@@ -1,7 +1,9 @@
 <?php
 include('../headLayout.php');
-$api_url = "http://localhost:8000/api/v1/company";
-$companies = json_decode(file_get_contents($api_url));
+include('../Controller/ApiCall.php');
+
+$apiCall = new ApiCall(ApiCall::COMPANY_BASEURL, $method="GET",  null);
+$companies = json_decode($apiCall->createCURLRequest());
 ?>
 <div class="container">
   <div class="sidebar">
@@ -21,6 +23,7 @@ $companies = json_decode(file_get_contents($api_url));
       </tr>
       </thead>
       <tbody>
+      <?php if(count($companies) > 0): ?>
       <?php foreach ($companies as $company): ?>
         <tr>
 
@@ -33,7 +36,7 @@ $companies = json_decode(file_get_contents($api_url));
             <a type="button" class="btn btn-primary" href="update?id=<?= $company->id?>">Update</a>
           </td>
         </tr>
-      <?php endforeach; ?>
+      <?php endforeach; endif;?>
       </tbody>
     </table>
   </div>

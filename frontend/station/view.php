@@ -1,11 +1,12 @@
-<!--{{--<form action="{{route('administrator.authenticate')}}" method="post">--}}-->
-<!--@include ('headLayout');-->
+
 <?php
 include('../headLayout.php');
+include('../Controller/ApiCall.php');
+
 $id = $_GET['id'];
 
-$api_url = "http://localhost:8000/api/v1/station/$id";
-$station = json_decode(file_get_contents($api_url));
+$apiCall = new ApiCall(ApiCall::STATION_BASEURL.$id, $method="GET",  null);
+$station = json_decode($apiCall->createCURLRequest());
 
 ?>
 <div class="container">
@@ -18,7 +19,7 @@ $station = json_decode(file_get_contents($api_url));
   <div class="content">
     <h2>Station Detail</h2>
 
-
+<?php if(!empty($station)): ?>
     <section class="" style="background-color: #9de2ff;">
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -61,7 +62,7 @@ $station = json_decode(file_get_contents($api_url));
       </div>
     </section>
 
-
+<?php endif; ?>
   </div>
 
 </div>

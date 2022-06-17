@@ -44,6 +44,9 @@
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Integrify/charging-docks-api" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Laptop\Desktop\Integrify\charging-docks-api" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\eas" />
     </key>
@@ -85,7 +88,7 @@
       <updated>1655201896412</updated>
       <workItem from="1655201906547" duration="55831000" />
       <workItem from="1655322176615" duration="25565000" />
-      <workItem from="1655394872197" duration="2280000" />
+      <workItem from="1655394872197" duration="2934000" />
     </task>
     <servers />
   </component>

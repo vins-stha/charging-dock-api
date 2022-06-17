@@ -1,49 +1,39 @@
 <?php
 session_start();
 include('../headLayout.php');
-$id = $_GET['id'];
-if (!isset($_SESSION['id']) || $_SESSION['id'] == null) {
-  $_SESSION['id'] = $id;
+include('../Controller/ApiCall.php');
+
+
+if (!isset($_SESSION['company_id']) || $_SESSION['company_id'] == null) {
+  $_SESSION['company_id'] = $_GET['id'];
 }
 
-$get_url = "http://localhost:8000/api/v1/company";
-$get_put_url = "http://localhost:8000/api/v1/company/$id";
-
-$companies = json_decode(file_get_contents($get_url));
-$company = json_decode(file_get_contents($get_put_url));
+// retrieve parent companies
+$companies = json_decode(file_get_contents(ApiCall::COMPANY_BASEURL));
+$company = json_decode(file_get_contents(ApiCall::COMPANY_BASEURL . $_SESSION['company_id']));
 
 // Checking for a PUT request
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+
   $name = $_POST["name"];
   $parent_company_name = $_POST["parent_company_name"];
   $data = array('name' => $name, 'parent_company_name' => $parent_company_name);
   $data = json_encode($data);
-  $put_url = $id == null ? "http://localhost:8000/api/v1/company/" . $_SESSION['id'] : "http://localhost:8000/api/v1/company/update/$id";
 
-  // curl initiate
-  $ch = curl_init();
+  $id = $_GET['id'] == null ? $_SESSION['company_id'] : $_GET['id'];
 
-  curl_setopt($ch, CURLOPT_URL, $put_url);
+  $apiCall = new ApiCall(ApiCall::COMPANY_BASEURL . $id, $method = "PUT", $data);
+  $response = $apiCall->createCURLRequest();
 
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Content-Length: ' . strlen($data)));
+  if (!empty(json_decode($response))) {
 
-// SET Method as a PUT
-  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+    session_destroy();
 
-// Pass user data in POST command
-  curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    header("Location: /frontend/company");
+  } else {
+    echo "Error updating " . $response;
+  }
 
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-// Execute curl and assign returned data
-  $response = curl_exec($ch);
-
-// Close curl
-  curl_close($ch);
-
-// See response if data is posted successfully or any error
-  session_destroy();
-  header("Location:http://localhost/frontend/company/");
 }
 
 ?>
@@ -84,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button class="btn btn-primary" type="submit" class="btn btn-default">Update</button>
+        <button class="btn btn-primary" name="submit" type="submit" class="btn btn-default">Update</button>
       </div>
     </div>
   </form>

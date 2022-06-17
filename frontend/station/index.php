@@ -1,7 +1,10 @@
 <?php
 include('../headLayout.php');
-$api_url = "http://localhost:8000/api/v1/station";
-$stations = json_decode(file_get_contents($api_url));
+include('../Controller/ApiCall.php');
+
+$apiCall = new ApiCall(ApiCall::STATION_BASEURL, $method="GET",  null);
+$stations = json_decode($apiCall->createCURLRequest());
+
 ?>
 <div class="container">
   <div class="sidebar">
@@ -21,6 +24,7 @@ $stations = json_decode(file_get_contents($api_url));
       </tr>
       </thead>
       <tbody>
+      <?php if (count($stations) > 0): ?>
       <?php foreach ($stations as $station): ?>
         <tr>
           <th scope="row"><?= $station->id ?></th>
@@ -34,6 +38,7 @@ $stations = json_decode(file_get_contents($api_url));
           </td>
         </tr>
       <?php endforeach; ?>
+      <?php endif; ?>
       </tbody>
     </table>
   </div>
