@@ -1,12 +1,13 @@
-<!--{{--<form action="{{route('administrator.authenticate')}}" method="post">--}}-->
-<!--@include ('headLayout');-->
+
 <?php
 include('../headLayout.php');
+include('../Controller/ApiCall.php');
+
 $id = $_GET['id'];
 
-$api_url = "http://localhost:8000/api/v1/company/$id";
-$company = json_decode(file_get_contents($api_url));
-var_dump($company);
+$apiCall = new ApiCall(ApiCall::COMPANY_BASEURL.$id, $method="GET",  null);
+$company = json_decode($apiCall->createCURLRequest());
+
 ?>
 <div class="sidebar">
   <a class="active" href="/frontend/">Home</a>
@@ -47,6 +48,7 @@ var_dump($company);
           </div>
 
           <?php if (count($company->stations) > 0): ?>
+          <h3>Stations</h3>
             <table class="table table-striped table-dark">
               <thead>
               <tr>

@@ -1,55 +1,46 @@
 <?php
 session_start();
 include('../headLayout.php');
+include('../Controller/ApiCall.php');
+
 $id = $_GET['id'];
-if (!isset($_SESSION['id']) || $_SESSION['id'] == null) {
-  $_SESSION['id'] = $id;
+if (!isset($_SESSION['station_id']) || $_SESSION['station_id'] == null) {
+  $_SESSION['station_id'] = $_GET['id'];
 }
 
-$get_url = "http://localhost:8000/api/v1/company";
-$companies = json_decode(file_get_contents($get_url));
+$apiCall = new ApiCall(ApiCall::COMPANY_BASEURL, $method = "GET", null);
+$companies = json_decode($apiCall->createCURLRequest());
 
-$get_put_url = "http://localhost:8000/api/v1/station/$id";
-$station = json_decode(file_get_contents($get_put_url));
+$apiCall = new ApiCall(ApiCall::STATION_BASEURL . $id, $method = "GET", null);
+$station = json_decode($apiCall->createCURLRequest());
 
 // Checking for a PUT request
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
   $name = $_POST["name"];
-  $parent_company_name = $_POST["company_name"];
+  $parent_company_name = $_POST["parent_company_name"];
   $latitude = $_POST["latitude"];
   $longitude = $_POST["longitude"];
   $address = $_POST["address"];
   $data = array(
       'name' => $name,
-      'company_name' => $parent_company_name,
+      'parent_company_name' => $parent_company_name,
       'latitude' => $latitude,
       'longitude' => $longitude,
       'address' => $address
   );
-  $put_url = $id == null ? "http://localhost:8000/api/v1/station/" . $_SESSION['id'] : "http://localhost:8000/api/v1/station/$id";
-
   $data = json_encode($data);
+  $id = $_GET['id'] == null ? $_SESSION['station_id'] : $_GET['id'];
+  $apiCall = new ApiCall(ApiCall::STATION_BASEURL . $id, $method = "PUT", $data);
+  $response = $apiCall->createCURLRequest();
 
-  $ch = curl_init();
+  if (!empty(json_decode($response))) {
 
-  curl_setopt($ch, CURLOPT_URL, $put_url);
+    session_destroy();
 
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json', 'Content-Length: ' . strlen($data)));
-
-// SET Method as a PUT
-  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-
-// Pass user data in POST command
-  curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-// Execute curl and assign returned data
-  $response = curl_exec($ch);
-// Close curl
-  curl_close($ch);
-
-  header("Location:http://localhost/frontend/station");
+    header("Location: /frontend/station");
+  } else {
+    echo "Error updating " . $response;
+  }
 
 }
 
@@ -64,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <a href="/frontend/station/create">Add new</a>
   </div>
 
-  <h3>Add new station</h3>
+  <h3>Update station</h3>
   <form class="form-horizontal" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
 
     <div class="form-group">
@@ -98,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="form-group">
       <label class="control-label">Parent company:</label>
       <div class="dropdown btn btn-default dropdown-toggle">
-        <select name="company_name">
+        <select name="parent_company_name">
           <option value="" name=""></option>
           <?php foreach ($companies as $company): ?>
             <?php if ($company->id == $station->company_id): ?>
@@ -113,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button class="btn btn-primary" type="submit" class="btn btn-default">Update</button>
+        <button class="btn btn-primary" name="submit" type="submit" class="btn btn-default">Update</button>
       </div>
     </div>
   </form>

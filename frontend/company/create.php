@@ -1,36 +1,22 @@
 <?php
 include('../headLayout.php');
-$url = "http://localhost:8000/api/v1/company";
-$companies = json_decode(file_get_contents($url));
+include('../Controller/ApiCall.php');
 
-// Checking for a POST request
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Checking for a POST request
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
   $name = $_POST["name"];
   $parent_company_name = $_POST["parent_company_name"];
   $data = array('name' => $name, 'parent_company_name' => $parent_company_name);
   $data = json_encode($data);
 
-  $ch = curl_init();
+  $apiCall = new ApiCall(ApiCall::COMPANY_BASEURL, $method="POST",  $data);
+  $response = $apiCall->createCURLRequest();
 
-  curl_setopt($ch, CURLOPT_URL, $url);
+  if(!$response)
+    echo "Error creating ";
 
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
-// SET Method as a POST
-  curl_setopt($ch, CURLOPT_POST, 1);
-
-// Pass user data in POST command
-  curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-// Execute curl and assign returned data
-  $response = curl_exec($ch);
-  var_dump($response);
-// Close curl
-  curl_close($ch);
-
-
+  else
+    header("Location: /frontend/company");
 }
 
 ?>
@@ -66,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button class="btn btn-primary" type="submit" class="btn btn-default">Submit</button>
+        <button class="btn btn-primary" name ="submit" type="submit" class="btn btn-default">Submit</button>
       </div>
     </div>
   </form>
