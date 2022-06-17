@@ -34,7 +34,7 @@ class StationController extends Controller
     {
         $lat=13.20;
         $long = 14.20;
-        $rad = 1.00;
+        $rad = 10.00;
         $stations = DB::table('station')->get()->all();
 
         $stationInRadius= [];
