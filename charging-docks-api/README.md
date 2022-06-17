@@ -19,7 +19,7 @@ Deployable in both local environment as well as via docker-environment
 - clone the app `git clone https://github.com/vins-stha/charging-dock-api.git`
 - pull from `develop` branch 
 - from root folder` docker-compose up --build -d `
-- access to terminal of the app with `docker exec -it CONTAINER_ID sh`
+- access to terminal of the app with `docker exec -it CONTAINER_ID sh` or `docker exec -it laravel_app sh`
 - make migrations via php `artisan migrate:fresh`
 - deploy with `php artisan serve`
 
